@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white p-0 w-100">
+  <a href="/books">
+    <figure class="b-logo">
+      <img src="/images/logo.png" alt="" srcset="">
+    </figure>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item ml-lg-2 mt-2 mt-lg-0">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAddBook">
+          <i class="fas fa-plus"></i> Add book
+        </button>
+      </li>
+      {{#if bookSelected}}
+      <li class="nav-item ml-lg-2 mt-2 mt-lg-0">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMarkup">
+          <i class="fas fa-bookmark"></i> Markup
+        </button>
+      </li>
+      <li class="nav-item ml-lg-2 mt-2 mt-lg-0">
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalEditMeta">
+          <i class="fas fa-pencil-alt"></i> Edit metadata
+        </button>
+      </li>
+      <li class="nav-item ml-lg-2 mt-2 mt-lg-0">
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalRemove">
+          <i class="fas fa-trash-alt"></i> Remove book
+        </button>
+      </li>
+      {{/if}}
+      <li class="nav-item ml-lg-2 mt-2 mt-lg-0">
+        <button type="button" class="btn btn-outline-danger" id="btnLogout">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>

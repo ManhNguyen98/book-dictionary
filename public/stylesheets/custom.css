@@ -1,0 +1,133 @@
+body {
+  margin: 0;
+  background-color: #f2f2f2;
+  overflow: hidden;
+}
+
+img {
+  width: 100%;
+}
+
+.b-logo {
+  width: 96px;
+  margin: 0;
+}
+
+.b-list-group li {
+  border: none;
+}
+
+.checked {
+  color: orange;
+}
+
+.wrap {
+	border-radius: 10px;
+}
+.stars {
+	cursor: pointer;
+}
+.star {
+	color: #ffc107 !important;
+}
+.rate {
+	height: 50px;
+	margin-left: -5px;
+	padding: 5px;
+	font-size: 25px;
+	position: relative;
+	cursor: pointer;
+}
+.rate input[type="radio"] {
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,0%);
+	pointer-events: none;
+}
+.star-over::after {
+	font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+	font-size: 16px;
+	content: "\f005";
+	display: inline-block;
+	color: #ffc107d2;
+	z-index: 1;
+	position: absolute;
+	top: 17px;
+	left: 10px;
+}
+
+.rate:nth-child(1) .face::after {
+	content: "\f119"; /* ☹ */
+}
+.rate:nth-child(2) .face::after {
+	content: "\f11a"; /* 😐 */
+}
+.rate:nth-child(3) .face::after {
+	content: "\f118"; /* 🙂 */
+}
+.rate:nth-child(4) .face::after {
+	content: "\f580"; /* 😊 */
+}
+.rate:nth-child(5) .face::after {
+	content: "\f59a"; /* 😄 */
+}
+.face {
+	opacity: 0;
+	position: absolute;
+	width: 35px;
+	height: 35px;
+	background: #dc3545;
+	border-radius: 5px;
+	top: -35px;
+	left: 2px;
+	transition: 0.2s;
+	pointer-events: none;
+}
+.face::before {
+	font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+	content: "\f0dd";
+	display: inline-block;
+	color: #dc3545;
+	z-index: 1;
+	position: absolute;
+	left: 9px;
+	bottom: -15px;
+}
+.face::after {
+	font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+	display: inline-block;
+	color: #fff;
+	z-index: 1;
+	position: absolute;
+	left: 5px;
+	top: -1px;
+}
+
+.rate:hover .face {
+	opacity: 1;
+}
+
+.form-signin {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	transform: translateY(-50%);
+	height: 400px;
+}
+
+.form-signin .logo {
+	width: 120px;
+}
+
+.copyright {
+	height: fit-content;
+	transform: translateY(-50%);
+	position: absolute;
+	top: 50%;
+}

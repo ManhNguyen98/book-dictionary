@@ -1,0 +1,309 @@
+<div class="row w-100" style="height: 85vh;">
+  <div class="col-lg-2 border-right pt-4">
+    <ul class="list-group b-list-group">
+      <li class="list-group-item pb-0 px-2">
+        <a href="#" class="px-1 text-dark d-flex justify-content-between align-items-center text-decoration-none" data-toggle="collapse" data-target="#author-menu">
+          <span>
+            <i class="fas fa-user-tie mr-2 text-info"></i>Authors
+          </span>
+          <span class="badge badge-primary">{{filters.authors.length}}</span>
+        </a>
+        <ul class="list-group b-list-group collapse" id="author-menu">
+          {{#each filters.authors}}
+            <li class="list-group-item py-0 px-0">
+              <a href="/books?author={{this.book_author}}" class="list-group-item-action px-1 py-2 float-right d-flex justify-content-between align-items-center text-secondary text-decoration-none" style="width: 95%;">
+                <span>
+                  <i class="fas fa-user-tie mr-2"></i>{{this.book_author}}
+                </span>
+                <span class="badge badge-danger">{{this.book_qtt}}</span>
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      </li>
+      <li class="list-group-item pb-0 px-2">
+        <a href="#" class="px-1 text-dark d-flex justify-content-between align-items-center text-decoration-none" data-toggle="collapse" data-target="#language-menu">
+          <span>
+            <i class="fas fa-globe-asia mr-2 text-success"></i>Languages
+          </span>
+          <span class="badge badge-primary">{{filters.languages.length}}</span>
+        </a>
+        <ul class="list-group b-list-group collapse" id="language-menu">
+          {{#each filters.languages}}
+            <li class="list-group-item py-0 px-0">
+              <a href="/books?language_code={{this.book_language_code}}" class="list-group-item-action px-1 py-2 float-right d-flex justify-content-between align-items-center text-secondary text-decoration-none" style="width: 95%;">
+                <span>
+                  <i class="fas fa-globe-asia mr-2"></i>{{this.book_language_code_name}}
+                </span>
+                <span class="badge badge-danger">{{this.book_qtt}}</span>
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      </li>
+      <li class="list-group-item pb-0 px-2">
+        <a href="#" class="px-1 text-dark d-flex justify-content-between align-items-center text-decoration-none" data-toggle="collapse" data-target="#publisher-menu">
+          <span>
+            <i class="fas fa-building mr-2 text-primary"></i>Publishers
+          </span>
+          <span class="badge badge-primary">{{filters.publishers.length}}</span>
+        </a>
+        <ul class="list-group b-list-group collapse" id="publisher-menu">
+          {{#each filters.publishers}}
+            <li class="list-group-item py-0 px-0">
+              <a href="/books?publisher={{this.book_publisher}}" class="list-group-item-action px-1 py-2 float-right d-flex justify-content-between align-items-center text-secondary text-decoration-none" style="width: 95%;">
+                <span>
+                  <i class="fas fa-building mr-2"></i>{{this.book_publisher}}
+                </span>
+                <span class="badge badge-danger">{{this.book_qtt}}</span>
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      </li>
+      <li class="list-group-item px-2">
+        <a href="#" class="px-1 text-dark d-flex justify-content-between align-items-center text-decoration-none" data-toggle="collapse" data-target="#rate-menu">
+          <span>
+            <i class="fas fa-star mr-2 text-warning"></i>Rate
+          </span>
+          <span class="badge badge-primary">{{filters.rates.length}}</span>
+        </a>
+        <ul class="list-group b-list-group collapse" id="rate-menu">
+          {{#each filters.rates}}
+            <li class="list-group-item py-0 px-0">
+              <a href="/books?rating={{this.book_rating}}" class="list-group-item-action px-1 py-2 float-right d-flex justify-content-between align-items-center text-secondary text-decoration-none" style="width: 95%;">
+                <span>
+                  <i class="fas fa-star mr-2"></i>{{this.book_rating}}
+                </span>
+                <span class="badge badge-danger">{{this.book_qtt}}</span>
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-lg-10 pt-4">
+    <div>
+      <form role="search" class="row no-gutters">
+        <div class="col-sm-10">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter some text..." name="search">
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <button class="btn btn-primary ml-3" type="submit"><i class="fas fa-search"></i> Search</button>
+        </div>
+      </form>
+    </div>
+    <div>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author(s)</th>
+            <th scope="col">Date</th>
+            <th scope="col">Pages</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Publisher</th>
+            <th scope="col">Published</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each books.items}}
+            <tr>
+              <th scope="row">
+                <a href='/books/{{this.id}}' style="color: black; text-decoration: none;">{{this.id}}</a>
+              </th>
+              <td>
+                <a href='/books/{{this.id}}' style="color: black; text-decoration: none;">{{this.title}}</a>
+              </td>
+              <td>{{this.author}}</td>
+              <td>{{this.created_at}}</td>
+              <td>{{this.pages}}</td>
+              <td class="text-warning book-rate" data-rate="{{this.rating}}"></td>
+              <td>{{this.publisher}}</td>
+              <td>{{this.published}}</td>
+            </tr>
+          {{/each}}
+          {{#unless books.items}}
+            <tr>
+            <td colspan="8" class="text-center">No data</td>
+            </tr>
+          {{/unless}}
+        </tbody>
+      </table>
+      <nav>
+        <ul class="pagination justify-content-center" id="pagination">
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalAddBook" tabindex="-1" role="dialog" aria-labelledby="modalAddBook" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modalAddBook">Add book</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formAddBook">
+            <div class="form-group">
+              <label for="titleInput" class="font-weight-bold">Title</label>
+              <input type="text" name="title" class="form-control" id="titleInput">
+            </div>
+            <div class="form-group">
+              <label for="authorInput" class="font-weight-bold">Author</label>
+              <input type="text" name="author" class="form-control" id="authorInput">
+            </div>
+            <div class="card card-secondary">
+              <div class="card-header d-flex justify-content-between py-0">
+                <div class="card-title m-0 font-weight-bold" style="line-height: 2;">Optional</div>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-toggle="collapse" data-target="#cardBody" aria-controls="cardBody" aria-expanded="false" aria-label="Toggle optional">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body collapse" id="cardBody">
+                <div class="form-group">
+                  <label for="coverUrlInput" class="font-weight-bold">Cover url</label>
+                  <input type="text" name="cover_url" class="form-control" id="coverUrlInput">
+                </div>
+                <div class="form-group">
+                  <label for="rateInput" class="font-weight-bold">Rating</label>
+                  <div class="wrap">
+                    <div class="stars">
+                      <label class="rate">
+                        <input type="radio" name="radio1" id="star1" value="star1">
+                        <div class="face"></div>
+                        <i class="far fa-star star one-star"></i>
+                      </label>
+                      <label class="rate">
+                        <input type="radio" name="radio1" id="star2" value="star2">
+                        <div class="face"></div>
+                        <i class="far fa-star star two-star"></i>
+                      </label>
+                      <label class="rate">
+                        <input type="radio" name="radio1" id="star3" value="star3">
+                        <div class="face"></div>
+                        <i class="far fa-star star three-star"></i>
+                      </label>
+                      <label class="rate">
+                        <input type="radio" name="radio1" id="star4" value="star4">
+                        <div class="face"></div>
+                        <i class="far fa-star star four-star"></i>
+                      </label>
+                      <label class="rate">
+                        <input type="radio" name="radio1" id="star5" value="star5">
+                        <div class="face"></div>
+                        <i class="far fa-star star five-star"></i>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="titleInput" class="font-weight-bold">Published</label>
+                  <input id="publishDatePicker" name="published"/>
+                </div>
+                <div class="form-group">
+                  <label for="publisherInput" class="font-weight-bold">Publisher</label>
+                  <input type="text" class="form-control" id="publisherInput" name="publisher">
+                </div>
+                <div class="form-group">
+                  <label for="titleInput" class="font-weight-bold">Language</label>
+                  <select class="custom-select" aria-label="Select language" name="language_code">
+                    <option selected value="vi">Vietnamese</option>
+                    <option value="en">English</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="pageInput" class="font-weight-bold">Pages</label>
+                  <input type="number" class="form-control" id="pageInput" name="pages">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Cancel</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAddBook"><i class="fas fa-save"></i> Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#publishDatePicker').datepicker({
+    uiLibrary: 'bootstrap4'
+  });
+  function formatSearch(page, limit) {
+    const { search } = window.location;
+    if (search === '') return `?page=${page}&limit=${limit}`
+    if (!search.includes('page') && !search.includes('limit')) return `${search}&page=${page}&limit=${limit}`
+    const urlParams = new URLSearchParams(search)
+    const params = Object.fromEntries(urlParams.entries())
+    const { page: oldPage, limit: oldLimit, ...rest } = params 
+    const query = Object.entries(rest).reduce((result, [key, value]) => {
+        return `${key}=${value}`;
+      }, '');
+    return `${query ? `?${query}&` : '?'}page=${page}&limit=${limit}`
+  }
+  $(document).ready(function() {
+    $('.book-rate').each(function() {
+      const rating = parseInt($(this).attr('data-rate'), 10);
+      if (rating > 0) {
+        let star = 0
+        let child = ''
+        while(star < rating) {
+          child += '<i class="fas fa-star"></i>'
+          star+=1
+        }
+        while(star < 5) {
+          child += '<i class="far fa-star"></i>'
+          star+=1
+        }
+        $(this).append(child)
+      }
+    })
+    const nextLink = '{{books.links.next}}'
+    const previousLink = '{{books.links.previous}}'
+    const totalPages = parseInt('{{books.meta.totalPages}}', 10)
+    const currentPage = parseInt('{{books.meta.currentPage}}', 10)
+    const itemsPerPage = parseInt('{{books.meta.itemsPerPage}}', 10)
+    const { search } = window.location
+
+    let child = '';
+    child += `<li class="page-item ${previousLink === '' && 'disabled'}"><a class="page-link" href="${previousLink}">Previous</a></li>`
+    let i = 1;
+    while (i <= totalPages) {
+      if (i === currentPage) {
+        child += `
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" href="/books${formatSearch(i, itemsPerPage)}">${i} <span class="sr-only">(current)</span></a>
+          </li>
+        `
+      } else {
+        child += `
+          <li class="page-item"><a class="page-link" href="/books${formatSearch(i, itemsPerPage)}">${i}</a></li>
+        `
+      }
+      i+=1
+    }
+    child+=`
+      <li class="page-item ${nextLink === '' && 'disabled'}">
+        <a class="page-link" href="${nextLink}">Next</a>
+      </li>
+    `
+    if (nextLink !== '' || previousLink !== '') {
+      $('#pagination').append(child)
+    }
+  })
+</script>
